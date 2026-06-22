@@ -1,0 +1,16 @@
+[
+  {
+    "nombre":"Funda Transparente",
+    "modelo":"iPhone 13",
+    "precio":6500,
+    "stock":8,
+    "imagen":"imagenes/iphone13-transparente.jpg"
+  },
+  {
+    "nombre":"Funda Antigolpes",
+    "modelo":"iPhone 14",
+    "precio":8500,
+    "stock":5,
+    "imagen":"imagenes/iphone14-antigolpes.jpg"
+  }
+]
