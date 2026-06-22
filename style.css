@@ -1,0 +1,150 @@
+:root{
+    --principal:#7D0732;
+    --secundario:#A63D69;
+    --fondo:#F0EAD9;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--fondo);
+}
+
+header{
+    background:var(--principal);
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+header h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:3rem;
+}
+
+header p{
+    opacity:.9;
+}
+
+.busqueda{
+    padding:20px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    margin-bottom:15px;
+}
+
+.categorias{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.categorias button{
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+main{
+    display:flex;
+    gap:20px;
+    padding:20px;
+}
+
+.productos{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
+
+.info{
+    padding:15px;
+}
+
+.nombre{
+    font-size:1.2rem;
+    font-weight:700;
+}
+
+.modelo{
+    color:#666;
+    margin-top:5px;
+}
+
+.precio{
+    color:var(--principal);
+    font-size:1.3rem;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.stock{
+    margin-top:10px;
+}
+
+.agregar{
+    margin-top:12px;
+    width:100%;
+    padding:12px;
+    background:var(--principal);
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.carrito{
+    width:300px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    height:fit-content;
+    position:sticky;
+    top:20px;
+}
+
+.total{
+    font-size:1.2rem;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+.whatsapp{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    background:#25D366;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+}
