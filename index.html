@@ -6,238 +6,66 @@
 
 <title>Aura Cases</title>
 
-<style>
-:root{
-    --principal:#7D0732;
-    --secundario:#A63D69;
-    --fondo:#F0EAD9;
-    --texto:#2B2B2B;
-}
+<link rel="stylesheet" href="style.css">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-body{
-    background:var(--fondo);
-    color:var(--texto);
-}
-
-header{
-    background:var(--principal);
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-
-header h1{
-    font-size:2rem;
-}
-
-.buscador{
-    padding:20px;
-    display:flex;
-    justify-content:center;
-}
-
-input{
-    width:90%;
-    max-width:500px;
-    padding:12px;
-    border:2px solid var(--principal);
-    border-radius:10px;
-}
-
-.productos{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-    gap:20px;
-    padding:20px;
-}
-
-.card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 3px 10px rgba(0,0,0,.1);
-}
-
-.card img{
-    width:100%;
-    height:250px;
-    object-fit:cover;
-}
-
-.info{
-    padding:15px;
-}
-
-.precio{
-    color:var(--principal);
-    font-size:1.2rem;
-    font-weight:bold;
-    margin:10px 0;
-}
-
-button{
-    width:100%;
-    border:none;
-    padding:12px;
-    background:var(--principal);
-    color:white;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:var(--secundario);
-}
-
-.carrito{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:var(--principal);
-    color:white;
-    padding:15px;
-    border-radius:50px;
-    cursor:pointer;
-    font-weight:bold;
-}
-</style>
 </head>
-
 <body>
 
 <header>
     <h1>Aura Cases</h1>
-    <p>Fundas para iPhone</p>
+    <p>Fundas Premium para iPhone</p>
 </header>
 
-<div class="buscador">
-    <input type="text" id="buscar" placeholder="Buscar modelo...">
-</div>
+<section class="busqueda">
 
-<div class="productos" id="productos"></div>
+    <input
+        type="text"
+        id="buscar"
+        placeholder="Buscar modelo..."
+    >
 
-<div class="carrito" onclick="enviarWhatsApp()">
-🛒 Pedido (<span id="cantidad">0</span>)
-</div>
+    <div class="categorias">
+        <button onclick="filtrarModelo('')">Todos</button>
+        <button onclick="filtrarModelo('11')">iPhone 11</button>
+        <button onclick="filtrarModelo('12')">iPhone 12</button>
+        <button onclick="filtrarModelo('13')">iPhone 13</button>
+        <button onclick="filtrarModelo('14')">iPhone 14</button>
+        <button onclick="filtrarModelo('15')">iPhone 15</button>
+    </div>
 
-<script>
+</section>
 
-const productos = [
-{
-modelo:"iPhone 13",
-nombre:"Funda Transparente",
-precio:6500,
-imagen:"https://via.placeholder.com/400x400?text=iPhone+13"
-},
-{
-modelo:"iPhone 14",
-nombre:"Funda Silicona Negra",
-precio:7000,
-imagen:"https://via.placeholder.com/400x400?text=iPhone+14"
-},
-{
-modelo:"iPhone 15 Pro",
-nombre:"Funda Antigolpes",
-precio:8500,
-imagen:"https://via.placeholder.com/400x400?text=iPhone+15+Pro"
-}
-];
+<main>
 
-const carrito = [];
+    <section id="productos" class="productos"></section>
 
-function mostrarProductos(lista){
+    <aside class="carrito">
 
-const contenedor = document.getElementById("productos");
+        <h2>Tu pedido</h2>
 
-contenedor.innerHTML="";
+        <div id="listaCarrito"></div>
 
-lista.forEach(producto=>{
+        <div class="total">
+            Total: $<span id="total">0</span>
+        </div>
 
-contenedor.innerHTML += `
-<div class="card">
+        <button class="whatsapp" onclick="enviarWhatsApp()">
+            Enviar por WhatsApp
+        </button>
 
-<img src="${producto.imagen}">
+    </aside>
 
-<div class="info">
-<h3>${producto.modelo}</h3>
-<p>${producto.nombre}</p>
+</main>
 
-<div class="precio">
-$${producto.precio.toLocaleString()}
-</div>
+<footer>
+    <p>📍 Paraná, Entre Ríos</p>
+    <p>📲 3435126095</p>
+</footer>
 
-<button onclick='agregar(${JSON.stringify(producto)})'>
-Agregar al pedido
-</button>
-
-</div>
-</div>
-`;
-});
-}
-
-function agregar(producto){
-
-carrito.push(producto);
-
-document.getElementById("cantidad").innerText =
-carrito.length;
-
-alert("Agregado al pedido");
-}
-
-function enviarWhatsApp(){
-
-if(carrito.length===0){
-alert("No hay productos");
-return;
-}
-
-let mensaje =
-"Hola Aura Cases, quiero pedir:%0A%0A";
-
-let total=0;
-
-carrito.forEach(p=>{
-
-mensaje +=
-`• ${p.modelo} - ${p.nombre} - $${p.precio}%0A`;
-
-total += p.precio;
-});
-
-mensaje += `%0ATotal: $${total}`;
-
-window.open(
-`https://wa.me/5493435126095?text=${mensaje}`,
-"_blank"
-);
-}
-
-mostrarProductos(productos);
-
-document
-.getElementById("buscar")
-.addEventListener("input",function(){
-
-const texto = this.value.toLowerCase();
-
-const filtrados = productos.filter(p=>
-p.modelo.toLowerCase().includes(texto)
-);
-
-mostrarProductos(filtrados);
-
-});
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
